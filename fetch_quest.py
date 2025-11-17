@@ -5,8 +5,8 @@ def fetch_quest():
     running = True
     won = False
     while running and not won:
-        player.location.describe()
-        command = input("What do you want to do? ")
+#		Print description of players current location
+#		Get command
 #		running = process_command(command, player, game_map)
 #		won = (number of items = NUM_ITEMS) AND (player.location = game_map.starting_location)
 #	ENDWHILE
