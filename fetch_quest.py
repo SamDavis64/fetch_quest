@@ -1,9 +1,10 @@
-#BEGIN fetch_quest
-#	Get difficulty
-#	game_map, player = initialise_game(difficulty)
-#	running = True
-#	won = False
-#	WHILE running AND NOT won
+# BEGIN fetch_quest
+def fetch_quest():
+    difficulty = int(input("Enter difficulty level (1–100): "))
+    game_map, player = initialise_game(difficulty)
+    running = True
+    won = False
+    while running and not won:
 #		Print description of players current location
 #		Get command
 #		running = process_command(command, player, game_map)
@@ -12,4 +13,7 @@
 #	IF won THEN
 #		Print “Congratulations!”
 #	ENDIF
-#END fetch_quest
+# END fetch_quest
+
+if __name__ == "__main__":
+    fetch_quest()
