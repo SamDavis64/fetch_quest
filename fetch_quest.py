@@ -1,4 +1,12 @@
-# BEGIN fetch_quest
+
+def initialise_game(difficulty):
+    pass
+
+
+def process_command(command, player, game_map):
+    pass
+
+
 def fetch_quest():
     difficulty = int(input("Enter difficulty level (1–100): "))
     game_map, player = initialise_game(difficulty)
