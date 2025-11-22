@@ -1,3 +1,5 @@
+import character
+
 NUM_ITEMS = 5
 NUM_LOCATIONS = 5
 
