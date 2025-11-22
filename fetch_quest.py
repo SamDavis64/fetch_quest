@@ -1,5 +1,7 @@
 import character
 import game_map
+import location
+import item
 
 NUM_ITEMS = 5
 NUM_LOCATIONS = 5
