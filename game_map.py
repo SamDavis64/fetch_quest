@@ -70,3 +70,64 @@ class GameMap:
             locations.append(location)
 
         return locations
+
+    def connect_locations(self):
+        # Connect all locations into a simple tree structure
+        directions = ['north', 'south', 'east', 'west']
+
+        unconnected = self.locations[:]
+        connected = [unconnected.pop(0)]
+
+        while unconnected:
+            # Pick a connected location that still has available exits
+            available = [loc for loc in connected if len(loc.neighbors) < len(directions)]
+            if not available:
+                # all connected locations are full; stop connecting
+                break
+
+            loc1 = random.choice(available)
+            loc2 = unconnected.pop(0)
+
+            # choose a direction that is still free
+            free_dirs = [d for d in directions if d not in loc1.neighbors]
+            if not free_dirs:
+                continue  # just in case, skip if somehow no free directions
+
+            dir = random.choice(free_dirs)
+            loc1.connect(loc2, dir)
+            connected.append(loc2)
+
+
+    def generate_item_names(self, num):
+        adjectives = [
+            "Glowing", "Ancient", "Silver", "Mystic", "Cracked",
+            "Golden", "Dark", "Frozen", "Burning", "Silent",
+            "Cursed", "Radiant", "Enchanted", "Shadowed", "Blessed"
+        ]
+        nouns = [
+            "Orb", "Key", "Crystal", "Ring", "Tome",
+            "Stone", "Amulet", "Lantern", "Scroll", "Gem",
+            "Blade", "Crown", "Mask", "Chalice", "Feather"
+        ]
+        names = set()
+        while len(names) < num:
+            names.add(random.choice(adjectives) + " " + random.choice(nouns))
+        return list(names)
+
+    def distribute_items(self):
+        items = [Item(name) for name in self.item_names]
+        for item in items:
+            location = random.choice(self.locations)
+            location.items.append(item)
+
+    def display_map(self):
+        """Display a readable table of all locations, their items, and directions."""
+        print("\n=== GAME MAP ===")
+        print(f"{'Location':30} | {'Items':35} | {'N':^3} | {'S':^3} | {'E':^3} | {'W':^3}")
+        print("-" * 85)
+        for loc in self.locations:
+            items_str = ", ".join([item.name for item in loc.items]) if loc.items else "-"
+            dirs = {d: "✓" if d in loc.neighbors else " " for d in ['north', 'south', 'east', 'west']}
+            print(f"{loc.name:30} | {items_str:35} | {dirs['north']:^3} | {dirs['south']:^3} | {dirs['east']:^3} | {dirs['west']:^3}")
+        print("-" * 85)
+
