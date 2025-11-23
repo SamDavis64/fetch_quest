@@ -1,6 +1,6 @@
 # ----- Character Class -----
 class Character:
-    """Characters traverse the locations collecting items."""
+    """Characters traverse locations collecting items."""
     def __init__(self, name, location):
         self.name = name
         self.location = location

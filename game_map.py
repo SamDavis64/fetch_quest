@@ -1,5 +1,10 @@
+import random
+from location import Location
+from item import Item
+
 # ----- GameMap Class -----
 class GameMap:
+    """Each Game uses a single game map to store all locations and all items"""
     def __init__(self, num_locations, num_items):
         self.locations = []
         self.item_names = []
