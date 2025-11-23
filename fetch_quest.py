@@ -1,11 +1,55 @@
+import math
+from game_map import GameMap
+from character import Character
+
 NUM_ITEMS = 5
 NUM_LOCATIONS = 5
 
-def initialise_game(difficulty):
-    pass
+# ----- Function to calc number of locations and items -----
+def calc_num_locations_items(difficulty):
+    """set global NUM_LOCATIONS and NUM_ITEMS."""
+    global NUM_LOCATIONS, NUM_ITEMS
+    NUM_LOCATIONS = difficulty
+    NUM_ITEMS = min(int(math.sqrt(difficulty)) + 5, difficulty)
 
+
+# ----- Initialize Game -----
+def initialise_game(difficulty):
+    """Initialises the game and returns the game map and player."""
+    print("Welcome to Fetch Quest!")
+    calc_num_locations_items(difficulty)
+    game_map = GameMap(NUM_LOCATIONS, NUM_ITEMS)
+    player = Character("Adventurer", game_map.starting_location)
+    print(f"Collect {NUM_ITEMS} items and return to {player.location.name} to win!")
+    return game_map, player
+
+
+# ----- Process Player Command -----
 def process_command(command, player, game_map):
-    pass
+    """Process the player's input command."""
+    if command.startswith("go "):
+        direction = command[3:]
+        if direction in ["north", "south", "east", "west"]:
+            player.move(direction)
+        else:
+            print("Invalid direction. Use north, south, east, or west.")
+    elif command.startswith("take "):
+        item_name = command[5:]
+        player.take_item(item_name)
+    elif command == "inventory":
+        player.inventory_list()
+    elif command == "look":
+        player.location.describe()
+    elif command == "map":
+        game_map.display_map()
+    elif command == "quit":
+        print("Thanks for playing!")
+        return False
+    else:
+        print("Unknown command. Try: go <direction>, take <item>, inventory, look, map, quit")
+    return True
+
+
 
 def fetch_quest():
     """
