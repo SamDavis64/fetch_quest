@@ -8,6 +8,7 @@ class GameMap:
     """
     Each Game uses a single game map to store all locations and all items
     """
+
     def __init__(self, num_locations, num_items):
         self.locations = []
         self.item_names = []
@@ -17,7 +18,6 @@ class GameMap:
         self.starting_location = self.locations[0]
         self.item_names = self.generate_item_names(num_items)
         self.distribute_items()
-
 
     def create_locations1(self, num):
         prefixes = [
@@ -36,7 +36,7 @@ class GameMap:
         while len(names) < num:
             names.add(random.choice(prefixes) + " " + random.choice(suffixes))
 
-        names = list(names) # Convert set to a list
+        names = list(names)  # Convert set to a list
 
         locations = []
         for name in names:  # Loop through each name in the 'names' collection
@@ -105,7 +105,6 @@ class GameMap:
             loc1.connect(loc2, dir)
             connected.append(loc2)
 
-
     def generate_item_names(self, num):
         adjectives = [
             "Glowing", "Ancient", "Silver", "Mystic", "Cracked",
@@ -130,15 +129,21 @@ class GameMap:
 
     def display_map(self):
         """Display a readable table of all locations, their items, and directions."""
-        print("\n=== GAME MAP ===")
+        print("=== GAME MAP ===")
         print(f"{'Location':30} | {'Items':35} | {'N':^3} | {'S':^3} | {'E':^3} | {'W':^3}")
         print("-" * 85)
         for loc in self.locations:
             items_str = ", ".join([item.name for item in loc.items]) if loc.items else "-"
             dirs = {d: "✓" if d in loc.neighbors else " " for d in ['north', 'south', 'east', 'west']}
-            print(f"{loc.name:30} | {items_str:35} | {dirs['north']:^3} | {dirs['south']:^3} | {dirs['east']:^3} | {dirs['west']:^3}")
+            print(
+                f"{loc.name:30} | {items_str:35} | {dirs['north']:^3} | {dirs['south']:^3} | {dirs['east']:^3} | {dirs['west']:^3}")
         print("-" * 85)
 
+
 if __name__ == "__main__":
-    game_map = GameMap(5,5)
-    game_map.display_map()
+    game_map = GameMap(2, 3)
+    print(f'start - {game_map.starting_location.name}')
+    for loc in game_map.locations:
+        print(loc.name)
+        for item in loc.items:
+            print(f'- {item.name}')

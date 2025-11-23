@@ -11,13 +11,6 @@ class Character:
         self.location = location
         self.inventory = []
 
-    def move(self, direction):
-        if direction in self.location.neighbors:
-            self.location = self.location.neighbors[direction]
-            print(f"You move {direction}.")
-        else:
-            print("You can't go that way.")
-
     def take_item(self, item_name):
         for item in self.location.items:
             if item.name.lower() == item_name.lower():
@@ -34,6 +27,13 @@ class Character:
                 print(f" - {item}")
         else:
             print("You are carrying nothing.")
+
+    def move(self, direction):
+        if direction in self.location.neighbors:
+            self.location = self.location.neighbors[direction]
+            print(f"You move {direction}.")
+        else:
+            print("You can't go that way.")
 
 
 if __name__ == "__main__":
