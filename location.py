@@ -22,5 +22,5 @@ class Location:
         if self.neighbors:
             print("Exits:", ", ".join(self.neighbors.keys()))
         else:
-            print("There are no visible exits.")
+            print("There are no visible exits.")  # Should never occur
 
