@@ -1,5 +1,6 @@
 # ----- Location Class -----
 class Location:
+    """Each location has its own items and connected neighbours"""
     def __init__(self, name):
         self.name = name
         self.items = []

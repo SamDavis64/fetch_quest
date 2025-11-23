@@ -1,6 +1,11 @@
 # ----- Character Class -----
+from location import Location
+from item import Item
+
 class Character:
-    """Characters traverse locations collecting items."""
+    """
+    Characters traverse locations collecting items
+    """
     def __init__(self, name, location):
         self.name = name
         self.location = location
@@ -29,3 +34,12 @@ class Character:
                 print(f" - {item}")
         else:
             print("You are carrying nothing.")
+
+
+if __name__ == "__main__":
+    test_location = Location("Test location")
+    test_location.items = [Item("Item1"), Item("Item2"), Item("Item3")]
+    player = Character("Fred", test_location)
+    player.take_item("item1")
+    player.take_item("item2")
+    player.inventory_list()

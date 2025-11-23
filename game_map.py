@@ -2,9 +2,12 @@ import random
 from location import Location
 from item import Item
 
+
 # ----- GameMap Class -----
 class GameMap:
-    """Each Game uses a single game map to store all locations and all items"""
+    """
+    Each Game uses a single game map to store all locations and all items
+    """
     def __init__(self, num_locations, num_items):
         self.locations = []
         self.item_names = []
@@ -136,3 +139,6 @@ class GameMap:
             print(f"{loc.name:30} | {items_str:35} | {dirs['north']:^3} | {dirs['south']:^3} | {dirs['east']:^3} | {dirs['west']:^3}")
         print("-" * 85)
 
+if __name__ == "__main__":
+    game_map = GameMap(5,5)
+    game_map.display_map()
